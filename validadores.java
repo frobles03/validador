@@ -2,18 +2,25 @@ import java.text.Normalizer;
 import java.util.*;
 import java.lang.*;
 
+
+
 public class validadores {
 
-    static String correo = "B.s場合にはáEz01@ufromail.cl";
-    static String clave = "patata";
+    static String correo = "B.s場мале.нькоеيوتيوتيوبдерево合にはáEz01@ufromail.com.mx.arg";
+   // static String clave = "patata";
 
     static String nickName;
 
     public static void main(String[] args) {
         System.out.println("tu correo es: "+correo);
-        System.out.println("es ufro mail?");
+        System.out.println("\n+-------------------+\n");
+        System.out.println("se verificara si es ufromail");
         ufromail();
+        System.out.println("\n+-------------------+\n");
+        System.out.println("se eliminaran caracteres no deseados, como por ejemplo: ");
+        System.out.println("-acentos\n-caracteres que no perteneciente al alfabeto ingles ");
         caracteresEspeciales();
+        System.out.println("\n+-------------------+\n");
         System.out.println( "se generarar tu nickname");
         generadorNickname();
 
@@ -69,8 +76,8 @@ public class validadores {
         pero que pasa si le pongo muchos "." o "@"
         solo tiene que haber 1 "@" y 2"."
          */
-
-        System.out.println("se borraran todos los caracteres con acento");
+           //extrañamente el arabe lo deja con espacios
+       // System.out.println("se borraran todos los caracteres con acento");
         String cadenaNormalize = Normalizer.normalize(correo, Normalizer.Form.NFD);
         String cadenaSinAcentos = cadenaNormalize.replaceAll("[^\\p{ASCII}]", "");
         //System.out.println("Resultado sin acento: " + cadenaSinAcentos);
@@ -81,7 +88,8 @@ public class validadores {
         correo=cadenaSinCaracteresEsp;
         //System.out.println("resultado en minuscula");
         correo=correo.toLowerCase();
-        System.out.println(correo);//transforma a minuscula
+
+        System.out.println("Resultado final: "+correo);//transforma a minuscula
         System.out.println("fin");
 
 
@@ -95,12 +103,16 @@ public class validadores {
         y si el ".cl" no esta despues de "ufromail"
 
          */
-        System.out.println("si es ufromail");
+
         if (correo.contains("ufromail") && correo.contains(".cl")) {
-            System.out.println("cumple con el dominio institucional ");
+            System.out.println("Su correo posee el dominio 'ufromail.cl' ");
+        }else{
+            System.out.println("NO CUMPLE con el dominio institucional\n vuelva a inentarlo ");
+            //System.exit(0);
+
         }
 
-        System.out.println("probando posicion de '.'");
+        //System.out.println("probando posicion de '.'");
         char[] evaluar = correo.toCharArray();
         int aux = 0;
 
@@ -108,24 +120,24 @@ public class validadores {
 
 
             if ((evaluar[1] == '.')) {
-                System.out.println("hay un punto en la posicion 1");
+                //System.out.println("hay un punto en la posicion 1");
                 aux++;
             } else {
-                System.out.println("no hay un punto de donde corresponde");
+                //System.out.println("no hay un punto de donde corresponde");
             }
                 if ((evaluar[evaluar.length - 3] == '.')) {
-                    System.out.println("hay  punto en la anteantepenultima posicion ");
+                    //System.out.println("hay  punto en la anteantepenultima posicion ");
                     aux++;
 
                 }
 
                 if (aux == 2) {
-                    System.out.println("ta  bien");
+                    System.out.println("su correo CUMPLE con el estandar del correo institucional");
                     aux = 0;
                     break;
 
                 } else {
-                    System.out.println("ta mal. hay mas puntos de los necesarios");
+                    System.out.println("su correo NO CUMPLE con el estandar del correo institucional");
                     aux = 0;
                     break;
                 }
